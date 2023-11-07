@@ -1,5 +1,6 @@
 import './style.css'
 import './component/card-search.js'
+import './component/card-city.js'
 
 
 document.querySelector('#app').innerHTML = `
@@ -13,90 +14,24 @@ document.querySelector('#app').innerHTML = `
 
     <section class="weadther__day">
 
-      <div class="card__day">
-        
+      <div id="card__day">
         <div class="card__title">
-          <h4 class="card__city">Berlin</h4>
+          <h3 class="card__city">Berlin</h3>
         </div>
-      
+
         <div class="day__weather">
           <div class="day__icon">
-            <img src="img/clouds.png" class="card__icon">          
+                <img src="img/clouds.png" class="card__icon">
           </div>
         </div>
 
         <div class="details">
-
           <div class="day__details">
-            <h3 class="card__temp">17 °C</h3>
+                <h3 class="card__temp">17 °C</h3>
           </div>
-
         </div>
       </div>
-
-      <div class="card__day">
-        
-        <div class="card__title">
-          <h4>London</h4>
-        </div>
       
-        <div class="day__weather">
-          <div class="day__icon">
-            <img src="img/drizzle.png">          
-          </div>
-        </div>
-
-        <div class="details">
-
-          <div class="day__details">
-            <h3 class="card__temp">17 °C</h3>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="card__day">
-        
-        <div class="card__title">
-          <h4>New York</h4>
-        </div>
-      
-        <div class="day__weather">
-          <div class="day__icon">
-            <img src="img/snow.png">          
-          </div>
-        </div>
-
-        <div class="details">
-
-          <div class="day__details">
-            <h3 class="card__temp">17 °C</h3>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="card__day">
-        
-        <div class="card__title">
-          <h4>Tokyo</h4>
-        </div>
-      
-        <div class="day__weather">
-          <div class="day__icon">
-            <img src="img/rain.png">          
-          </div>
-        </div>
-
-        <div class="details">
-
-          <div class="day__details">
-            <h3 class="card__temp">17 °C</h3>
-          </div>
-
-        </div>
-      </div>
-
     </section>
 
     <section class="card">
