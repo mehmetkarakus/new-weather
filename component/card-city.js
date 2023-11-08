@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const cardDay = document.querySelector(".card__day");
+    const cardDay = document.getElementById("card__container");
     const apiKey = "3e754eda3de0afa016899c9106005d58";
     const cardTitle = ["Berlin", "London", "New York", "Tokyo"];
 
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 card.classList.add("card");
 
                 const cardCity = data.name;
-                const cardTemp = data.main.temp;
+                const cardTemp = Math.round(data.main.temp);
                 const cardWeather = data.weather[0].main;
 
                 let weatherIconSrc = "";
@@ -36,9 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 card.innerHTML = `
-                <h2>${cardCity}</h2>
-                <img src="${weatherIconSrc}" alt="Hava Durumu İkonu">
-                <p>Sıcaklık: ${cardTemp} °C</p>
+                <h3>${cardCity}</h3>
+                <img class="card__icon" src="${weatherIconSrc}" alt="Hava Durumu iconu">
+                <p>${cardTemp} °C</p>
             `;
 
                 cardDay.appendChild(card);
