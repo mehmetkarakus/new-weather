@@ -178,3 +178,9 @@ img.card__icon {
 .day__wind {
   font-size: 30px;
 }
+
+.daily__weather {
+  display: grid;
+  grid-template-columns: repeat(5, 2fr);
+  gap: 15px;
+}
