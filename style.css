@@ -8,6 +8,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Barlow', sans-serif;
 }
 
 #app {
@@ -92,6 +93,7 @@ img.card__icon {
 .weather {
   display: grid;
   grid-template-columns: repeat(2, 2fr);
+  align-items: center;
 }
 
 .icon {
@@ -125,8 +127,7 @@ img.card__icon {
 .col {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  justify-content: space-evenly;
 }
 
 .col img {
