@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const cardDay = document.getElementById("card__container");
     const apiKey = "3e754eda3de0afa016899c9106005d58";
-    const cardTitle = ["Berlin", "London", "New York", "Tokyo"];
+    const cardTitle = ["Berlin", "London", "New York", "Tokyo", "Rome"];
 
     cardTitle.forEach(city => {
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 card.classList.add("card");
 
                 const cardCity = data.name;
-                const cardTemp = Math.round(data.main.temp);
+                const cardTemp =Math.round(data.main.temp);
                 const cardWeather = data.weather[0].main;
 
                 let weatherIconSrc = "";

@@ -12,15 +12,12 @@ document.querySelector('#app').innerHTML = `
     </button>
   </section>
 
-  <section class="weadther__day">
+  <section id="card__container" class="card__capital">
 
-    <div id="card__container" class="card__container">
-      
-    </div>
       
   </section>
 
-  <section class="card">
+  <section class="card__city">
 
     <div class="weather">
       <div class="icon">
