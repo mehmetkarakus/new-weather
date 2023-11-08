@@ -75,6 +75,12 @@ img.card__icon {
   width: 80px;
 }
 
+.card h5 {
+  margin: 0;
+  font-size: 19px;
+  margin-top: 5px;
+}
+
 .card__city {
   background-color: #cbc9c987;
   border-radius: 15px;
@@ -82,8 +88,6 @@ img.card__icon {
   width: 70%;
   padding: 1.5em;
 }
-
-
 
 .weather {
   display: grid;

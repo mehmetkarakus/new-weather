@@ -1,6 +1,6 @@
 import './style.css'
 import './component/card-search.js'
-import './component/card-city.js'
+import './component/card-capital.js'
 
 
 document.querySelector('#app').innerHTML = `

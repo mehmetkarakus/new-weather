@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 card.innerHTML = `
                 <h3>${cardCity}</h3>
                 <img class="card__icon" src="${weatherIconSrc}" alt="Hava Durumu iconu">
-                <p>${cardTemp} °C</p>
+                <h5>${cardTemp} °C</h5>
             `;
 
                 cardDay.appendChild(card);
