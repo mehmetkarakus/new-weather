@@ -184,3 +184,113 @@ img.card__icon {
   grid-template-columns: repeat(5, 2fr);
   gap: 15px;
 }
+
+@media screen and (max-width: 770px) {
+
+  .card__capital {
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .card__city {
+    width: 75%;
+  }
+
+  .icon img {
+    width: 150px;
+  }
+
+  .details__city h1 {
+    font-size: 60px;
+    margin-top: 15px;
+  }
+
+  .details__city h2 {
+    font-size: 35px;
+  }
+
+  .col {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .col img {
+    width: 35px;
+  }
+
+  .humidity,
+  .wind {
+    font-size: 21px;
+  }
+
+  .daily__weather {
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    gap: 15px;
+  }
+
+}
+
+@media screen and (max-width: 490px) {
+
+  .search {
+    gap: 10px;
+  }
+
+  .card__capital {
+    grid-template-columns: repeat(2, 150px);
+  }
+
+  .card__city {
+    width: 85%;
+  }
+
+  .weather {
+    grid-template-columns: none;
+}
+
+  .details__information {
+    display: grid;
+    grid-template-columns: repeat(2, 125px);
+    margin-top: 50px;
+    gap: 15px;
+  }
+
+  .daily__weather {
+    display: grid;
+    grid-template-columns: repeat(2, 150px);
+    gap: 15px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+
+  .search {
+    gap: 10px;
+  }
+
+  .card__capital {
+    grid-template-columns: repeat(1, 150px);
+  }
+
+  .card__city {
+    width: 85%;
+  }
+
+  .details__information {
+    grid-template-columns: none;
+  }
+
+  .daily__weather {
+    display: grid;
+    grid-template-columns: repeat(1, 150px);
+    gap: 15px;
+  }
+
+  .col {
+    justify-content: space-evenly;
+    gap: 0px;
+  }
+}
