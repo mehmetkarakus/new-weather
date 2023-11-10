@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.querySelector(".search input");
     const searchBtn = document.querySelector(".search button");
     const weatherIcon = document.querySelector(".weather__icon");
+    const background  = document.createElement("body");
 
     async function checkWeather(city) {
 
@@ -20,18 +21,23 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector(".wind").innerHTML = data.list[0].wind.speed + " km/h";
 
         if (data.list[0].weather[0].main == "Clouds") {
+            background.url = "./img/cluods-backgorund.jpg"
             weatherIcon.src = "./img/clouds.png"
         }
         else if (data.list[0].weather[0].main == "Clear") {
+            background.url = "./img/clear-backgorund.jpg"
             weatherIcon.src = "./img/clear.png"
         }
         else if (data.list[0].weather[0].main == "Drizzle") {
+            background.url = "./img/drizzle.jpg"
             weatherIcon.src = "./img/dizzle.png"
         }
         else if (data.list[0].weather[0].main == "Rain") {
+            background.url = "./img/rain-backgorund.jpg"
             weatherIcon.src = "./img/rain.png"
         }
         else if (data.list[0].weather[0].main == "Snow") {
+            background.url = "./img/snow-backgorund.jpg"
             weatherIcon.src = "./img/snow.png"
         }
 
