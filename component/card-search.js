@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.querySelector(".search input");
     const searchBtn = document.querySelector(".search button");
     const weatherIcon = document.querySelector(".weather__icon");
-    const background  = document.querySelector(".background");
+    const backgroundElement  = document.getElementById("background");
 
     async function checkWeather(city) {
 
@@ -21,23 +21,23 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector(".wind").innerHTML = data.list[0].wind.speed + " km/h";
 
         if (data.list[0].weather[0].main == "Clouds") {
-            background.src = "./img/clouds-background.jpg"
+            backgroundElement.style.backgroundImage = 'url(img/clouds-background.jpg)'
             weatherIcon.src = "./img/clouds.png"
         }
         else if (data.list[0].weather[0].main == "Clear") {
-            background.src = "./img/clear-background.jpg"
+            backgroundElement.style.backgroundImage = 'url(img/clear-background.jpg)'
             weatherIcon.src = "./img/clear.png"
         }
         else if (data.list[0].weather[0].main == "Drizzle") {
-            background.src = "./img/drizzle-background.jpg"
+            backgroundElement.style.backgroundImage = 'url(img/drizzle-background.jpg)'
             weatherIcon.src = "./img/dizzle.png"
         }
         else if (data.list[0].weather[0].main == "Rain") {
-            background.src = "./img/rain-background.jpg"
+            backgroundElement.style.backgroundImage = 'url(img/rain-background.jpg)'
             weatherIcon.src = "./img/rain.png"
         }
         else if (data.list[0].weather[0].main == "Snow") {
-            background.src = "./img/snow-background.jpg"
+            backgroundElement.style.backgroundImage = 'url(img/snow-background.jpg)'
             weatherIcon.src = "./img/snow.png"
         }
 
