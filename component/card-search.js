@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         console.log(data)
 
+        const searchCity = await fetch(city.json)
+        console.log(searchCity)
+
         document.querySelector(".city").innerHTML = data.city.name;
         document.querySelector(".temp").innerHTML = Math.round(data.list[0].main.temp) + " °C";
         document.querySelector(".humidity").innerHTML = data.list[0].main.humidity + " %";
@@ -46,12 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
     searchInput.addEventListener("keyup", (e) => {
         if(e.keyCode === 13){
             checkWeather(searchInput.value);
+            searchInput.value = "";
         }
     });
 
     searchBtn.addEventListener("click", () => {
         checkWeather(searchInput.value);
+        searchInput.value = "";
     });
 
 });
-

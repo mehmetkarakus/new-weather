@@ -2,11 +2,10 @@ import './style.css'
 import './component/card-search.js'
 import './component/card-capital.js'
 
-
 document.querySelector('#app').innerHTML = `
 
       <section class="search">
-        <input type="text" placeholder="Şehir İsmi Giriniz">
+        <input type="text" placeholder="Şehir İsmi Giriniz" onkeydown="searchInput">
         <button>
         <i class="fa-solid fa-magnifying-glass"></i>
         </button>
