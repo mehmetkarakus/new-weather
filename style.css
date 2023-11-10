@@ -1,7 +1,7 @@
 body {
   height: 100%;
   margin: 30px;
-  background-image: url('img/weather__app2.jpg');
+  background-image: url("/img/clear-background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
