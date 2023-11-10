@@ -1,20 +1,28 @@
 body {
   height: 100%;
-  margin: 30px;
-  background-image: url("/img/clear-background.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0;
   font-family: 'Barlow', sans-serif;
 }
 
-#app {
+section.test {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+
+img.background {
+  width: 100%;
+  height: 100%;
+}
+
+.contents {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
 }
 
 p {
