@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let dailyData = {};
 
         data.list.forEach(dateArr => {
+            const date = new Date(dateArr.dt * 1000);
+            const day = date.toLocaleString({ weekday: "long" });
 
             if (!dailyData[day]) {
                 dailyData[day] = [];
@@ -21,14 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        const firstDayData = dailyData[Object.keys(dailyData)[0]];
-        createCityCard(firstDayData);
+        dailyData.forEach(day => {
 
-        for (const day in dailyData) {
-            if (day !== Object.keys(dailyData)[0]) {
-                createDailyCard(day, dailyData[day]);
-            }
-        }
+            
+
+        })
+
+        console.log(dailyData);
     }
 
     dataSwitch()
