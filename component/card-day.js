@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cardCityContainer = document.getElementById("card__city");
     const dailyWeatherContainer = document.getElementById("daily__weather");
 
-
+    searchInput.value = "İstanbul";
     async function dataSwitch(city) {
         try {
             const response = await fetch(`${apiUrl}${city}&appid=${apiKey}`);
@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     createDailyCard(day, dailyData[day]);
                 }
             }
+            
         } catch (error) {
             console.error("Error fetching weather data:", error.message);
         }
@@ -97,18 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
         windHeading.appendChild(windIcon);
         windHeading.innerHTML = `<img src="img/wind.png">${wind} km/h`;
 
-        function updateHumidity(humidityValue) {
-            humidityIcon.src = "img/humidity.png";
-            humidityHeading.innerHTML = `<img src="img/humidity.png">${humidityValue}%`;
-        }
-
-        function updateWind(windValue) {
-            windHeading.innerHTML = `<img src="img/wind.png">${windValue} km/h`;
-        }
-
-        updateWind(10);
-        updateHumidity(50);
-
         weather.appendChild(icon);
         weather.appendChild(detailsCity);
         detailsCity.appendChild(tempHeading);
@@ -123,32 +112,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createDailyCard(day, dayData) {
         const dailyWeatherContainer = document.getElementById("daily__weather");
-
+    
         const card = document.createElement("div");
         card.classList.add("card");
-
+    
         if (!dayData || dayData.length === 0) {
             console.error(`Hava durumu verileri eksik for ${day}.`);
             return;
         }
-
+    
         const dateHeading = document.createElement("h3");
         dateHeading.textContent = day;
-
+    
         const weatherIcon = document.createElement("img");
         const weatherMain = dayData[0].weather.main.toLowerCase();
         weatherIcon.src = `img/${weatherMain}.png`;
         weatherIcon.classList.add("card__icon");
-
+    
         const temperature = document.createElement("h5");
         temperature.textContent = `${Math.round(dayData[0].temp)} °C`;
-
+    
         card.appendChild(dateHeading);
         card.appendChild(weatherIcon);
         card.appendChild(temperature);
-
+    
         dailyWeatherContainer.appendChild(card);
+    
+        card.addEventListener("click", () => {
+            console.log(`Tıklanan gün: ${day}`);
+        });
     }
+    
 
     searchBtn.addEventListener("click", () => {
         const searchInputValue = searchInput.value;
@@ -157,5 +151,4 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    dataSwitch("Istanbul");
 });

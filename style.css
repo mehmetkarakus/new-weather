@@ -191,6 +191,16 @@ p.humidity, .wind {
   gap: 20px;
 }
 
+.slider-container {
+  display: flex; 
+  overflow-x: auto; 
+}
+
+.card {
+  margin-right: 10px; 
+}
+
+
 @media screen and (max-width: 770px) {
 
   .card__capital {

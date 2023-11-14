@@ -46,12 +46,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    searchInput.addEventListener("keyup", (e) => {
-        if(e.keyCode === 13){
-            checkWeather(searchInput.value);
-            searchInput.value = "";
-        }
-    });
+    // searchInput.addEventListener("keyup", (e) => {
+    //     if(e.keyCode === 13){
+    //         checkWeather(searchInput.value);
+    //         searchInput.value = "";
+    //     }
+    // });
 
     searchBtn.addEventListener("click", () => {
         checkWeather(searchInput.value);
