@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         windHeading.innerHTML = `<img src="img/wind.png">${wind} km/h`;
 
         function updateHumidity(humidityValue) {
-            humidityIcon.src = "img/humidity.png"; // Eğer ikon her zaman aynı ise bu satırı silebilirsiniz
+            humidityIcon.src = "img/humidity.png";
             humidityHeading.innerHTML = `<img src="img/humidity.png">${humidityValue}%`;
         }
 
