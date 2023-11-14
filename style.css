@@ -130,7 +130,7 @@ img.card__icon {
   justify-content: space-evenly;
 }
 
-.col img {
+p img {
   width: 40px;
 }
 
@@ -183,6 +183,12 @@ img.card__icon {
   display: grid;
   grid-template-columns: repeat(5, 2fr);
   gap: 15px;
+}
+
+p.humidity, .wind {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 @media screen and (max-width: 770px) {
