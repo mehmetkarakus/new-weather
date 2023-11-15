@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
             for (const day in dailyData) {
                 if (day !== Object.keys(dailyData)[0]) {
                     createDailyCard(day, dailyData[day]);
-                    createDailyCard.innerHTML == "";
                     console.log(day, dailyData[day]);
                 }
             }
@@ -127,11 +126,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     
        function createDailyCard(day, dayData) {
+
+        console.log(day, dayData, 'bunlar');
         
             createDailyCard.innerHTML = "";
 
             const dailyWeather = document.getElementById("daily__weather")
-
     
             const card = document.createElement("div");
             card.classList.add("card");
@@ -150,6 +150,10 @@ document.addEventListener("DOMContentLoaded", () => {
             dailyWeather.appendChild(card)
     
         }
+
+        const searchCity = (cityName) => {
+
+        }
     
     }
 
@@ -159,6 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (searchInputValue.trim() == "") {
             dataSwitch(searchInputValue);
             searchInput.value = "";
+            dailyWeatherContainer.innerHTML = ""
         }
     });
 
@@ -166,6 +171,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.keyCode === 13) {
             dataSwitch(searchInput.value);
             searchInput.value = "";
+            dailyWeatherContainer.innerHTML = ""
+
         }
     });
 
