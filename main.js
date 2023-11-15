@@ -1,8 +1,6 @@
 import './style.css'
 import './component/card-search.js'
 import './component/card-capital.js'
-import './component/card-day.js'
-import './component/search-filter.js'
 
 document.querySelector('#app').innerHTML = `
 

@@ -1,61 +1,173 @@
 document.addEventListener("DOMContentLoaded", () => {
-
     const apiKey = "3e754eda3de0afa016899c9106005d58";
     const apiUrl = "https://api.openweathermap.org/data/2.5/forecast?units=metric&q=";
 
-    const searchInput = document.querySelector(".search input");
-    const searchBtn = document.querySelector(".search button");
-    const weatherIcon = document.querySelector(".weather__icon");
-    const backgroundElement  = document.getElementById("background");
+    const searchInput = document.getElementById("searchInput");
+    const searchBtn = document.getElementById("searchBtn");
+    const cardCityContainer = document.getElementById("card__city");
+    const dailyWeatherContainer = document.getElementById("daily__weather");
+    const backgroundElements = document.getElementById("background");
 
-    async function checkWeather(city) {
+    async function dataSwitch(city) {
+        try {
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+            const data = await response.json();
 
-        const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
-        const data = await response.json();
+            let dailyData = {};
 
-        console.log(data)
+            data.list.forEach(dateArr => {
+                const date = new Date(dateArr.dt * 1000);
+                const day = date.toLocaleString("tr-TR", { weekday: "long" });
 
-        const searchCity = await fetch(city.json)
-        console.log(searchCity)
+                if (!dailyData[day]) {
+                    dailyData[day] = [];
+                }
 
-        document.querySelector(".city").innerHTML = data.city.name;
-        document.querySelector(".temp").innerHTML = Math.round(data.list[0].main.temp) + " °C";
-        document.querySelector(".humidity").innerHTML = data.list[0].main.humidity + " %";
-        document.querySelector(".wind").innerHTML = data.list[0].wind.speed + " km/h";
+                dailyData[day].push({
+                    time: dateArr.dt_txt.split(" ")[1],
+                    weather: dateArr.weather[0],
+                    temp: dateArr.main.temp,
+                    humidity: dateArr.main.humidity,
+                    wind: dateArr.wind.speed
+                });
+            });
 
-        if (data.list[0].weather[0].main == "Clouds") {
-            backgroundElement.style.backgroundImage = 'url(img/clouds-background.jpg)'
-            weatherIcon.src = "./img/clouds.png"
+            createCityCard(dailyData[Object.keys(dailyData)[0]], city);
+
+            for (const day in dailyData) {
+                if (day !== Object.keys(dailyData)[0]) {
+                    createDailyCard(day, dailyData[day]);
+                    createDailyCard.innerHTML == "";
+                    console.log(day, dailyData[day]);
+                }
+            }
+
+            if(data.list[0].weather[0].main == "Clouds"){
+                backgroundElements.style.backgroundImage = 'url(img/clouds-background.jpg)'
+            }
+            else if(data.list[0].weather[0].main == "Rain"){
+                backgroundElements.style.backgroundImage = 'url(img/rain-background.jpg)'
+            }
+            else if(data.list[0].weather[0].main == "Clear"){
+                backgroundElements.style.backgroundImage = 'url(img/clear-background.jpg)'
+            }
+            else if(data.list[0].weather[0].main == "Drizzle"){
+                backgroundElements.style.backgroundImage = 'url(img/drizzle-background.jpg)'
+            }
+            else if(data.list[0].weather[0].main == "Snow"){
+                backgroundElements.style.backgroundImage = 'url(img/snow-background.jpg)'
+            }
+
+            console.log(dailyData)
+
+        } catch (error) {
+            console.error("Error fetching weather data:", error.message);
         }
-        else if (data.list[0].weather[0].main == "Clear") {
-            backgroundElement.style.backgroundImage = 'url(img/clear-background.jpg)'
-            weatherIcon.src = "./img/clear.png"
-        }
-        else if (data.list[0].weather[0].main == "Drizzle") {
-            backgroundElement.style.backgroundImage = 'url(img/drizzle-background.jpg)'
-            weatherIcon.src = "./img/dizzle.png"
-        }
-        else if (data.list[0].weather[0].main == "Rain") {
-            backgroundElement.style.backgroundImage = 'url(img/rain-background.jpg)'
-            weatherIcon.src = "./img/rain.png"
-        }
-        else if (data.list[0].weather[0].main == "Snow") {
-            backgroundElement.style.backgroundImage = 'url(img/snow-background.jpg)'
-            weatherIcon.src = "./img/snow.png"
-        }
 
+        function createCityCard(dayData, cityName) {
+            cardCityContainer.innerHTML = "";
+    
+            const weatherData = dayData[0].weather;
+            const temp = Math.round(dayData[0].temp);
+            const humidity = dayData[0].humidity;
+            const wind = dayData[0].wind;
+    
+            const humidityIcon = document.createElement("img");
+            humidityIcon.src = "img/humidity.png";
+    
+            const windIcon = document.createElement("img");
+            windIcon.src = "img/wind.png";
+    
+            const card = document.createElement("div");
+            card.classList.add("weatherCity");
+    
+            const weather = document.createElement("div");
+            weather.classList.add("weather");
+    
+            const icon = document.createElement("div");
+            icon.classList.add("icon");
+            const iconImage = document.createElement("img");
+            iconImage.src = `img/${weatherData.main}.png`;
+            icon.appendChild(iconImage);
+    
+            const detailsCity = document.createElement("div");
+            detailsCity.classList.add("details__city");
+    
+            const tempHeading = document.createElement("h1");
+            tempHeading.classList.add("temp");
+            tempHeading.textContent = `${temp} °C`;
+    
+            const cityHeading = document.createElement("h2");
+            cityHeading.classList.add("city");
+            cityHeading.textContent = cityName;
+    
+            const detailsDaily = document.createElement("div");
+            detailsDaily.classList.add("details__information");
+    
+            const humidityHeading = document.createElement("p");
+            humidityHeading.classList.add("humidity");
+            humidityHeading.appendChild(humidityIcon);
+            humidityHeading.innerHTML = `<img src="img/humidity.png">${humidity} km/h`;
+    
+            const windHeading = document.createElement("p");
+            windHeading.classList.add("wind");
+            windHeading.appendChild(windIcon);
+            windHeading.innerHTML = `<img src="img/wind.png">${wind} km/h`;
+    
+            weather.appendChild(icon);
+            weather.appendChild(detailsCity);
+            detailsCity.appendChild(tempHeading);
+            detailsCity.appendChild(cityHeading);
+            detailsDaily.appendChild(humidityHeading);
+            detailsDaily.appendChild(windHeading);
+    
+            card.appendChild(weather);
+            card.appendChild(detailsDaily);
+            cardCityContainer.appendChild(card);
+        }
+    
+       function createDailyCard(day, dayData) {
+        
+            createDailyCard.innerHTML = "";
+
+            const dailyWeather = document.getElementById("daily__weather")
+
+    
+            const card = document.createElement("div");
+            card.classList.add("card");
+    
+            const cardDay = day;
+            const cardTemp = Math.round(dayData[0].temp);
+            const cardWeather = dayData[0].weather.main;
+    
+    
+            card.innerHTML = `
+                <h3>${cardDay}</h3>
+                <img class="card__icon" src="img/${cardWeather}.png" alt="Hava Durumu iconu">
+                <h5>${cardTemp} °C</h5>
+            `;
+    
+            dailyWeather.appendChild(card)
+    
+        }
+    
     }
 
-    // searchInput.addEventListener("keyup", (e) => {
-    //     if(e.keyCode === 13){
-    //         checkWeather(searchInput.value);
-    //         searchInput.value = "";
-    //     }
-    // });
-
+    
     searchBtn.addEventListener("click", () => {
-        checkWeather(searchInput.value);
-        searchInput.value = "";
+        const searchInputValue = searchInput.value;
+        if (searchInputValue.trim() == "") {
+            dataSwitch(searchInputValue);
+            searchInput.value = "";
+        }
     });
 
-});
+    searchInput.addEventListener("keyup", (e) => {
+        if (e.keyCode === 13) {
+            dataSwitch(searchInput.value);
+            searchInput.value = "";
+        }
+    });
+
+    dataSwitch("İzmir")
+})
