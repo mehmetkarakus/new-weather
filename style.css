@@ -21,12 +21,34 @@ p {
   margin: 0;
 }
 
-.search {
+section.search {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.searchInput {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 30px;
   width: 70%;
+}
+
+.searchUl {
+  width: 54%;
+  margin: 0;
+  padding: 0;
+}
+
+.search ul li {
+  background-color: #b5c6b9;
+  list-style: none;
+  padding: 12px 60px;
+  border-radius: 20px;
+  text-align: center;
+  margin: 10px;
 }
 
 .search input {

@@ -1,14 +1,23 @@
 import './style.css'
 import './component/card-search.js'
 import './component/card-capital.js'
+import './component/search-filter.js'
 
 document.querySelector('#app').innerHTML = `
 
   <section class="search">
-    <input type="text" id="searchInput" placeholder="Şehir İsmi Giriniz">
-    <button id="searchBtn">
-      <i class="fa-solid fa-magnifying-glass"></i>
-    </button>
+  
+    <div class="searchInput">
+      <input type="text" id="searchInput" placeholder="Şehir İsmi Giriniz">
+
+      <button id="searchBtn">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+    
+    <ul id="searchResults" class="searchUl">
+
+    </ul>
   </section>
 
   <div id="resultContainer"></div>

@@ -1,43 +1,56 @@
-const jsonFilePath = 'json/city.json';
+document.addEventListener("DOMContentLoaded", () => {
+    var searchInput = document.getElementById('searchInput');
 
-// JSON dosyasından veriyi çeken fonksiyon
-async function getCityData() {
-    try {
-        const response = await fetch(jsonFilePath);
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+    var searchResults = document.getElementById('searchResults');
+
+    searchInput.addEventListener('input', function () {
+        performSearch();
+    });
+
+    function performSearch() {
+        var searchTerm = searchInput.value.toLowerCase();
+
+        if (searchTerm === '') {
+            searchResults.style.display = 'none';
+            return;
         }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Fetch error:', error);
+        displayResults(searchTerm);
     }
-}
 
-async function filterCities(searchTerm) {
-    const cityData = await getCityData();
-    const filteredCities = cityData.filter(city => city.name.toLowerCase().includes(searchTerm.toLowerCase()));
-    return filteredCities;
-}
+    function displayResults(searchTerm) {
+       var items = ["Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin","Burdur","Bolu","Bitlis","Bingöl","Bilecik","Balıkesir","Aydın",
+        "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli", "Diyarbakır", "Elazığ", "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari", "Hatay", "Isparta", 
+        "Mersin", "İstanbul", "İzmir", "Kars", "Kastamonu", "Kayseri", "Kırklareli", "Kırşehir", "Kocaeli", "Konya", "Kütahya", "Malatya", "Manisa", "Kahramanmaraş", "Mardin", 
+        "Muğla", "Muş", "Nevşehir", "Niğde", "Ordu", "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Tekirdağ", "Tokat", "Trabzon", "Tunceli", "Şanlıurfa", "Uşak", 
+        "Van", "Yozgat", "Zonguldak", "Aksaray", "Bayburt", "Karaman", "Kırıkkale", "Batman", "Şırnak", "Bartın", "Ardahan", "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", 
+        "Düzce"];
 
-async function searchCity(event) {
-    if (event.key === 'Enter') {
+        var filteredItems = items.filter(function (item) {
+            return item.toLowerCase().includes(searchTerm);
+        });
 
-        const searchInput = document.getElementById('searchInput');
-        const resultContainer = document.getElementById('resultContainer');
+        renderResults(filteredItems);
+    }
 
-        const searchTerm = searchInput.value.trim();
-        if (searchTerm !== '') {
-            const filteredCities = await filterCities(searchTerm);
+    function renderResults(results) {
+        searchResults.innerHTML = '';
 
-            resultContainer.innerHTML = '';
-            filteredCities.forEach(city => {
-                const cityElement = document.createElement('div');
-                cityElement.textContent = city.name;
-                resultContainer.appendChild(cityElement);
+        results.forEach(function (result) {
+            var li = document.createElement('li');
+            li.textContent = result;
+            
+            li.addEventListener('mouseover', function () {
+                searchInput.value = result;
             });
-        } else {
-            resultContainer.innerHTML = '';
-        }
+
+            li.addEventListener('click', function () {
+                searchResults.style.display = 'none';
+            });
+
+            searchResults.appendChild(li);
+        });
+
+        searchResults.style.display = 'block';
     }
-}
+})
+

@@ -8,176 +8,173 @@ document.addEventListener("DOMContentLoaded", () => {
     const dailyWeatherContainer = document.getElementById("daily__weather");
     const backgroundElements = document.getElementById("background");
 
-    async function dataSwitch(city) {
+    async function fetchData(city) {
         try {
             const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
             const data = await response.json();
-
-            let dailyData = {};
-
-            data.list.forEach(dateArr => {
-                const date = new Date(dateArr.dt * 1000);
-                const day = date.toLocaleString("tr-TR", { weekday: "long" });
-
-                if (!dailyData[day]) {
-                    dailyData[day] = [];
-                }
-
-                dailyData[day].push({
-                    time: dateArr.dt_txt.split(" ")[1],
-                    weather: dateArr.weather[0],
-                    temp: dateArr.main.temp,
-                    humidity: dateArr.main.humidity,
-                    wind: dateArr.wind.speed
-                });
-            });
-
-            createCityCard(dailyData[Object.keys(dailyData)[0]], city);
-
-            for (const day in dailyData) {
-                if (day !== Object.keys(dailyData)[0]) {
-                    createDailyCard(day, dailyData[day]);
-                    console.log(day, dailyData[day]);
-                }
-            }
-
-            if (data.list[0].weather[0].main == "Clouds") {
-                backgroundElements.style.backgroundImage = 'url(img/clouds-background.jpg)'
-            }
-            else if (data.list[0].weather[0].main == "Rain") {
-                backgroundElements.style.backgroundImage = 'url(img/rain-background.jpg)'
-            }
-            else if (data.list[0].weather[0].main == "Clear") {
-                backgroundElements.style.backgroundImage = 'url(img/clear-background.jpg)'
-            }
-            else if (data.list[0].weather[0].main == "Drizzle") {
-                backgroundElements.style.backgroundImage = 'url(img/drizzle-background.jpg)'
-            }
-            else if (data.list[0].weather[0].main == "Snow") {
-                backgroundElements.style.backgroundImage = 'url(img/snow-background.jpg)'
-            }
-
-            console.log(dailyData)
-
+            return data;
         } catch (error) {
             console.error("Error fetching weather data:", error.message);
         }
+    }
 
-        function createCityCard(dayData, cityName) {
-            cardCityContainer.innerHTML = "";
+    function setWeatherBackground(weather) {
+        const backgrounds = {
+            "Clouds": 'url(img/clouds-background.jpg)',
+            "Rain": 'url(img/rain-background.jpg)',
+            "Clear": 'url(img/clear-background.jpg)',
+            "Drizzle": 'url(img/drizzle-background.jpg)',
+            "Snow": 'url(img/snow-background.jpg)'
+        };
 
-            const weatherData = dayData[0].weather;
-            const temp = Math.round(dayData[0].temp);
-            const humidity = dayData[0].humidity;
-            const wind = dayData[0].wind;
+        backgroundElements.style.backgroundImage = backgrounds[weather] || 'url(img/default-background.jpg)';
+    }
 
-            const humidityIcon = document.createElement("img");
-            humidityIcon.src = "img/humidity.png";
+    function createCityCard(dayData, cityName) {
+        cardCityContainer.innerHTML = "";
 
-            const windIcon = document.createElement("img");
-            windIcon.src = "img/wind.png";
+        const weatherData = dayData[0].weather;
+        const temp = Math.round(dayData[0].temp);
+        const humidity = dayData[0].humidity;
+        const wind = dayData[0].wind;
 
-            const card = document.createElement("div");
-            card.classList.add("weatherCity");
+        const humidityIcon = document.createElement("img");
+        humidityIcon.src = "img/humidity.png";
 
-            const weather = document.createElement("div");
-            weather.classList.add("weather");
+        const windIcon = document.createElement("img");
+        windIcon.src = "img/wind.png";
 
-            const icon = document.createElement("div");
-            icon.classList.add("icon");
-            const iconImage = document.createElement("img");
-            iconImage.src = `img/${weatherData.main}.png`;
-            icon.appendChild(iconImage);
+        const card = document.createElement("div");
+        card.classList.add("weatherCity");
 
-            const detailsCity = document.createElement("div");
-            detailsCity.classList.add("details__city");
+        const weather = document.createElement("div");
+        weather.classList.add("weather");
 
-            const tempHeading = document.createElement("h1");
-            tempHeading.classList.add("temp");
-            tempHeading.textContent = `${temp} °C`;
+        const icon = document.createElement("div");
+        icon.classList.add("icon");
+        const iconImage = document.createElement("img");
+        iconImage.src = `img/${weatherData.main}.png`;
+        icon.appendChild(iconImage);
 
-            const cityHeading = document.createElement("h2");
-            cityHeading.classList.add("city");
-            cityHeading.textContent = cityName;
+        const detailsCity = document.createElement("div");
+        detailsCity.classList.add("details__city");
 
-            const detailsDaily = document.createElement("div");
-            detailsDaily.classList.add("details__information");
+        const tempHeading = document.createElement("h1");
+        tempHeading.classList.add("temp");
+        tempHeading.textContent = `${temp} °C`;
 
-            const humidityHeading = document.createElement("p");
-            humidityHeading.classList.add("humidity");
-            humidityHeading.appendChild(humidityIcon);
-            humidityHeading.innerHTML = `<img src="img/humidity.png">${humidity} km/h`;
+        const cityHeading = document.createElement("h2");
+        cityHeading.classList.add("city");
+        cityHeading.textContent = cityName;
 
-            const windHeading = document.createElement("p");
-            windHeading.classList.add("wind");
-            windHeading.appendChild(windIcon);
-            windHeading.innerHTML = `<img src="img/wind.png">${wind} km/h`;
+        const detailsDaily = document.createElement("div");
+        detailsDaily.classList.add("details__information");
 
-            weather.appendChild(icon);
-            weather.appendChild(detailsCity);
-            detailsCity.appendChild(tempHeading);
-            detailsCity.appendChild(cityHeading);
-            detailsDaily.appendChild(humidityHeading);
-            detailsDaily.appendChild(windHeading);
+        const humidityHeading = document.createElement("p");
+        humidityHeading.classList.add("humidity");
+        humidityHeading.appendChild(humidityIcon);
+        humidityHeading.innerHTML = `<img src="img/humidity.png">${humidity} km/h`;
 
-            card.appendChild(weather);
-            card.appendChild(detailsDaily);
-            cardCityContainer.appendChild(card);
-        }
+        const windHeading = document.createElement("p");
+        windHeading.classList.add("wind");
+        windHeading.appendChild(windIcon);
+        windHeading.innerHTML = `<img src="img/wind.png">${wind} km/h`;
 
-        function createDailyCard(day, dayData) {
+        weather.appendChild(icon);
+        weather.appendChild(detailsCity);
+        detailsCity.appendChild(tempHeading);
+        detailsCity.appendChild(cityHeading);
+        detailsDaily.appendChild(humidityHeading);
+        detailsDaily.appendChild(windHeading);
 
-            console.log(day, dayData, 'bunlar');
+        card.appendChild(weather);
+        card.appendChild(detailsDaily);
+        cardCityContainer.appendChild(card);
+    }
 
-            createDailyCard.innerHTML = "";
+    function createDailyCard(day, dayData) {
 
-            const dailyWeather = document.getElementById("daily__weather")
+        console.log(day, dayData, 'bunlar');
 
-            const card = document.createElement("div");
-            card.classList.add("card");
+        createDailyCard.innerHTML = "";
 
-            const cardDay = day;
-            const cardTemp = Math.round(dayData[0].temp);
-            const cardWeather = dayData[0].weather.main;
+        const dailyWeather = document.getElementById("daily__weather")
 
+        const card = document.createElement("div");
+        card.classList.add("card");
 
-            card.innerHTML = `
-                    <h3>${cardDay}</h3>
-                    <img class="card__icon" src="img/${cardWeather}.png" alt="Hava Durumu iconu">
-                    <h5>${cardTemp} °C</h5>
-                `;
-
-            dailyWeather.appendChild(card)
-
-        }
+        const cardDay = day;
+        const cardTemp = Math.round(dayData[0].temp);
+        const cardWeather = dayData[0].weather.main;
 
 
+        card.innerHTML = `
+                <h3>${cardDay}</h3>
+                <img class="card__icon" src="img/${cardWeather}.png" alt="Hava Durumu iconu">
+                <h5>${cardTemp} °C</h5>
+            `;
 
-        const searchCity = (cityName) => {
-
-        }
+        dailyWeather.appendChild(card)
 
     }
 
+    async function dataSwitch(city) {
+        const data = await fetchData(city);
 
+        if (!data) {
+            return;
+        }
+
+        let dailyData = {};
+
+        data.list.forEach(dateArr => {
+            const date = new Date(dateArr.dt * 1000);
+            const day = date.toLocaleString("tr-TR", { weekday: "long" });
+
+            if (!dailyData[day]) {
+                dailyData[day] = [];
+            }
+
+            dailyData[day].push({
+                time: dateArr.dt_txt.split(" ")[1],
+                weather: dateArr.weather[0],
+                temp: dateArr.main.temp,
+                humidity: dateArr.main.humidity,
+                wind: dateArr.wind.speed
+            });
+        });
+
+        createCityCard(dailyData[Object.keys(dailyData)[0]], city);
+
+        for (const day in dailyData) {
+            if (day !== Object.keys(dailyData)[0]) {
+                createDailyCard(day, dailyData[day]);
+            }
+        }
+
+        setWeatherBackground(data.list[0].weather[0].main);
+        console.log(dailyData);
+    }
 
     searchBtn.addEventListener("click", () => {
-        const searchInputValue = searchInput.value;
-        if (searchInputValue.trim() == "") {
+        const searchInputValue = searchInput.value.trim();
+        if (searchInputValue !== "") {
             dataSwitch(searchInputValue);
             searchInput.value = "";
-            dailyWeatherContainer.innerHTML = ""
+            dailyWeatherContainer.innerHTML = "";
         }
     });
 
     searchInput.addEventListener("keyup", (e) => {
         if (e.keyCode === 13) {
-            dataSwitch(searchInput.value);
-            searchInput.value = "";
-            dailyWeatherContainer.innerHTML = ""
-
+            const searchInputValue = searchInput.value.trim();
+            if (searchInputValue !== "") {
+                dataSwitch(searchInputValue);
+                searchInput.value = "";
+                dailyWeatherContainer.innerHTML = "";
+            }
         }
     });
 
-    dataSwitch("İzmir")
-})
+    dataSwitch("İzmir");
+});
