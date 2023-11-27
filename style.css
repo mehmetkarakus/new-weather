@@ -46,6 +46,20 @@ section.search {
   overflow: overlay;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;  
+  border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: grey; 
+  border-radius: 10px;
+}
+
 .search ul li {
   background-color: #cbc9c987;
   list-style: none;
