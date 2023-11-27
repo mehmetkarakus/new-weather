@@ -38,7 +38,7 @@ section.search {
 }
 
 .searchUl {
-  width: 54%;
+  width: 55%;
   margin: 0;
   padding: 0;
   height: auto;
@@ -244,6 +244,10 @@ p.humidity,
 
 @media screen and (max-width: 770px) {
 
+  .searchUl {
+    width: 65%;
+  }
+
   .card__capital {
     display: grid;
     grid-template-columns: repeat(3, 150px);
@@ -291,6 +295,10 @@ p.humidity,
 }
 
 @media screen and (max-width: 490px) {
+
+  .searchUl {
+    width: 75%;
+  }
 
   .search {
     gap: 10px;
