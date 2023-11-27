@@ -26,6 +26,7 @@ section.search {
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
 .searchInput {
@@ -40,12 +41,13 @@ section.search {
   width: 54%;
   margin: 0;
   padding: 0;
-  height: 200px;
+  height: auto;
+  max-height: 200px;
   overflow: overlay;
 }
 
 .search ul li {
-  background-color: #b5c6b9;
+  background-color: #cbc9c987;
   list-style: none;
   padding: 12px 60px;
   border-radius: 20px;
@@ -209,19 +211,20 @@ p img {
   gap: 15px;
 }
 
-p.humidity, .wind {
+p.humidity,
+.wind {
   display: flex;
   justify-content: center;
   gap: 20px;
 }
 
 .slider-container {
-  display: flex; 
-  overflow-x: auto; 
+  display: flex;
+  overflow-x: auto;
 }
 
 .card {
-  margin-right: 10px; 
+  margin-right: 10px;
 }
 
 
@@ -289,7 +292,7 @@ p.humidity, .wind {
 
   .weather {
     grid-template-columns: none;
-}
+  }
 
   .details__information {
     display: grid;
