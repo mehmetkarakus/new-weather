@@ -20,8 +20,6 @@ document.querySelector('#app').innerHTML = `
     </ul>
   </section>
 
-  <div id="resultContainer"></div>
-
   <section id="card__container" class="card__capital">
     
   </section>
