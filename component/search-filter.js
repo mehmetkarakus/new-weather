@@ -2,12 +2,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   var searchInput = document.getElementById("searchInput");
   var searchResults = document.getElementById("searchResults");
 
+  var resultsContainer = document.createElement("div");
+  resultsContainer.classList.add("results-container");
+  searchResults.appendChild(resultsContainer);
+
   searchInput.addEventListener("input", function () {
     performSearch();
   });
 
   async function performSearch() {
-    var searchTerm = searchInput.value.toLocaleLowerCase("TR");
+    var searchTerm = searchInput.value.toLowerCase("tr-TR");
 
     if (searchTerm === "") {
       searchResults.style.display = "none";
@@ -22,15 +26,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function displayResults(searchTerm, items) {
     var filteredItems = items.filter(function (item) {
-      return item.toLocaleLowerCase("tr-TR").includes(searchTerm);
+      return item.toLowerCase("tr-TR").includes(searchTerm);
     });
-    
 
     renderResults(filteredItems);
   }
 
   function renderResults(results) {
-    searchResults.innerHTML = "";
+    resultsContainer.innerHTML = "";
 
     results.forEach(function (result) {
       var li = document.createElement("li");
@@ -44,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         searchResults.style.display = "none";
       });
 
-      searchResults.appendChild(li);
+      resultsContainer.appendChild(li);
     });
 
     searchResults.style.display = "block";
