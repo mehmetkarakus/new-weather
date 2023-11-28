@@ -1,22 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
-    var searchInput = document.getElementById('searchInput');
-
-    var searchResults = document.getElementById('searchResults');
-
-    searchInput.addEventListener('input', function () {
-        performSearch();
+    var searchInput = document.getElementById("searchInput");
+  
+    var searchResults = document.getElementById("searchResults");
+  
+    searchInput.addEventListener("input", function () {
+      performSearch();
     });
-
+  
     function performSearch() {
-        var searchTerm = searchInput.value.toLowerCase();
-
-        if (searchTerm === '') {
-            searchResults.style.display = 'none';
-            return;
-        }
-        displayResults(searchTerm);
+      var searchTerm = searchInput.value.toLocaleLowerCase("TR");
+  
+      if (searchTerm === "") {
+        searchResults.style.display = "none";
+        return;
+      }
+      displayResults(searchTerm);
     }
-
+  
     function displayResults(searchTerm) {
        var items = ["Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin","Burdur","Bolu","Bitlis","Bingöl","Bilecik","Balıkesir","Aydın",
         "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli", "Diyarbakır", "Elazığ", "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari", "Hatay", "Isparta", 
@@ -31,25 +31,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
         renderResults(filteredItems);
     }
-
+  
     function renderResults(results) {
-        searchResults.innerHTML = '';
-
-        results.forEach(function (result) {
-            var li = document.createElement('li');
-            li.textContent = result;
-            
-            li.addEventListener('mouseover', function () {
-                searchInput.value = result;
-            });
-
-            li.addEventListener('click', function () {
-                searchResults.style.display = 'none';
-            });
-
-            searchResults.appendChild(li);
+      searchResults.innerHTML = "";
+  
+      results.forEach(function (result) {
+        var li = document.createElement("li");
+        li.textContent = result;
+  
+        li.addEventListener("mouseover", function () {
+          searchInput.value = result;
         });
-
-        searchResults.style.display = 'block';
+  
+        li.addEventListener("click", function () {
+          searchResults.style.display = "none";
+        });
+  
+        searchResults.appendChild(li);
+      });
+  
+      searchResults.style.display = "block";
     }
-})
+  
+  });
+  
