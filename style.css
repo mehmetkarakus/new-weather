@@ -8,7 +8,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Barlow', sans-serif;
+  font-family: "Barlow", sans-serif;
 }
 
 #app {
@@ -25,55 +25,22 @@ section.search {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-
+  position: absolute;
 }
 
 .searchInput {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 30px;
-  width: 70%;
-}
-
-.searchUl {
-  width: 55%;
-  margin: 0;
-  padding: 0;
-  height: auto;
-  max-height: 200px;
-  overflow: overlay;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;  
-  border-radius: 10px;
-}
- 
-::-webkit-scrollbar-thumb {
-  background: grey; 
-  border-radius: 10px;
-}
-
-.search ul li {
-  background-color: #cbc9c987;
-  list-style: none;
-  padding: 12px 60px;
-  border-radius: 20px;
-  text-align: center;
-  margin: 10px;
 }
 
 .search input {
   padding: 15px;
   border: none;
   border-radius: 20px;
-  width: 55%;
+  width: 30%;
   opacity: 0.7;
 }
 
@@ -86,6 +53,61 @@ section.search {
 
 .search button i {
   font-size: 25px;
+}
+
+.search__list {
+  width: 63%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search__ul {
+  width: 50%;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  max-height: 200px;
+  overflow: overlay;
+  position: relative;
+  z-index: 1;
+  background-color: #b5beb5;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 10px;
+}
+
+.search ul li {
+  border-bottom: 1px solid;
+  list-style: none;
+  padding: 12px 60px;
+  text-align: center;
+  margin: 10px;
+}
+
+.search__not {
+  display: none;
+  justify-content: flex-end;
+  width: 63%;
+}
+
+.not__found {
+  width: 48%;
+  padding: 10px;
+  z-index: 1;
+  background-color: #b5beb5;
+  border-radius: 15px;
 }
 
 .card {
@@ -105,6 +127,9 @@ section.search {
   display: grid;
   grid-template-columns: repeat(5, 2fr);
   gap: 15px;
+  position: relative;
+  top: 50px;
+  z-index: 0;
 }
 
 .card h3 {
@@ -128,9 +153,11 @@ img.card__icon {
   margin-top: 30px;
   width: 70%;
   padding: 1.5em;
+  position: relative;
+  top: 50px;
 }
 
-.weather {
+.city__day--weather {
   display: grid;
   grid-template-columns: repeat(2, 2fr);
   align-items: center;
@@ -142,23 +169,23 @@ img.card__icon {
   align-items: center;
 }
 
-.details__city {
+.city__weather--details {
   text-align: center;
 }
 
-.details__city h1 {
+.city__weather--details h1 {
   font-size: 80px;
   margin: 0;
   margin-top: 30px;
 }
 
-.details__city h2 {
+.city__weather--details h2 {
   font-size: 45px;
   margin: 0;
   margin-top: 15px;
 }
 
-.details__information {
+.weather__details--information {
   display: grid;
   grid-template-columns: repeat(2, 2fr);
   margin-top: 50px;
@@ -174,8 +201,8 @@ p img {
   width: 40px;
 }
 
-.humidity,
-.wind {
+.city__humidity,
+.city__wind {
   font-size: 30px;
 }
 
@@ -223,10 +250,12 @@ p img {
   display: grid;
   grid-template-columns: repeat(5, 2fr);
   gap: 15px;
+  position: relative;
+  top: 50px;
 }
 
-p.humidity,
-.wind {
+p.city__humidity,
+.city__wind {
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -241,9 +270,7 @@ p.humidity,
   margin-right: 10px;
 }
 
-
 @media screen and (max-width: 770px) {
-
   .searchUl {
     width: 65%;
   }
@@ -263,12 +290,12 @@ p.humidity,
     width: 150px;
   }
 
-  .details__city h1 {
+  .city__weather--details h1 {
     font-size: 60px;
     margin-top: 15px;
   }
 
-  .details__city h2 {
+  .city__weather--details h2 {
     font-size: 35px;
   }
 
@@ -281,8 +308,8 @@ p.humidity,
     width: 35px;
   }
 
-  .humidity,
-  .wind {
+  .city__humidity,
+  .city__wind {
     font-size: 21px;
   }
 
@@ -291,11 +318,9 @@ p.humidity,
     grid-template-columns: repeat(3, 150px);
     gap: 15px;
   }
-
 }
 
 @media screen and (max-width: 490px) {
-
   .searchUl {
     width: 75%;
   }
@@ -316,7 +341,7 @@ p.humidity,
     grid-template-columns: none;
   }
 
-  .details__information {
+  .weather__details--information {
     display: grid;
     grid-template-columns: repeat(2, 125px);
     margin-top: 50px;
@@ -331,7 +356,6 @@ p.humidity,
 }
 
 @media screen and (max-width: 350px) {
-
   .search {
     gap: 10px;
   }
@@ -344,7 +368,7 @@ p.humidity,
     width: 85%;
   }
 
-  .details__information {
+  .weather__details--information {
     grid-template-columns: none;
   }
 

@@ -2,6 +2,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   var searchInput = document.getElementById("searchInput");
   var searchResults = document.getElementById("searchResults");
 
+  var resultsContainer = document.createElement("div");
+  resultsContainer.classList.add("results-container");
+  searchResults.appendChild(resultsContainer);
+
   searchInput.addEventListener("input", function () {
     performSearch();
   });
@@ -22,21 +26,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function displayResults(searchTerm, items) {
     var filteredItems = items.filter(function (item) {
-      return item.toLocaleLowerCase("tr-TR").includes(searchTerm);
+      return item.toLocaleLowerCase("TR").includes(searchTerm);
     });
-    
 
     renderResults(filteredItems);
   }
 
   function renderResults(results) {
-    searchResults.innerHTML = "";
+    resultsContainer.innerHTML = "";
 
     results.forEach(function (result) {
       var li = document.createElement("li");
       li.textContent = result;
 
-      li.addEventListener("mouseover", function () {
+      li.addEventListener("click", function () {
         searchInput.value = result;
       });
 
@@ -44,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         searchResults.style.display = "none";
       });
 
-      searchResults.appendChild(li);
+      resultsContainer.appendChild(li);
     });
 
     searchResults.style.display = "block";

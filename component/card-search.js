@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const apiUrl = "https://api.openweathermap.org/data/2.5/forecast?units=metric&q=";
 
     const searchInput = document.getElementById("searchInput");
-    const searchBtn = document.getElementById("searchBtn");
-    const cardCityContainer = document.getElementById("card__city");
-    const dailyWeatherContainer = document.getElementById("daily__weather");
-    const backgroundElements = document.getElementById("background");
+    const searchButton = document.getElementById("searchButton");
+    const cityDailyWeather = document.getElementById("card__city");
+    const fiveDailyWeather = document.getElementById("daily__weather");
+    const dailyWeatherBackground = document.getElementById("background");
 
     async function fetchData(city) {
         try {
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function setWeatherBackground(weather) {
+    const weatherBackground = weather => {
         const backgrounds = {
             "Clouds": 'url(img/clouds-background.jpg)',
             "Rain": 'url(img/rain-background.jpg)',
@@ -27,16 +27,40 @@ document.addEventListener("DOMContentLoaded", () => {
             "Snow": 'url(img/snow-background.jpg)'
         };
 
-        backgroundElements.style.backgroundImage = backgrounds[weather] || 'url(img/default-background.jpg)';
+        dailyWeatherBackground.style.backgroundImage = backgrounds[weather] || 'url(img/default-background.jpg)';
     }
 
-    function createCityCard(dayData, cityName) {
-        cardCityContainer.innerHTML = "";
+    function cityCard(dayData, cityName) { 
+        cityDailyWeather.innerHTML = "";
 
         const weatherData = dayData[0].weather;
         const temp = Math.round(dayData[0].temp);
         const humidity = dayData[0].humidity;
         const wind = dayData[0].wind;
+
+        const weatherCard = document.createElement("div");
+        weatherCard.classList.add("city__daily--weather");
+
+        const dailyWeather = document.createElement("div");
+        dailyWeather.classList.add("city__day--weather");
+
+        const icon = document.createElement("div");
+        icon.classList.add("icon");
+        
+        const iconImage = document.createElement("img");
+        iconImage.src = `img/${weatherData.main}.png`;
+        icon.appendChild(iconImage);
+
+        const cityWeatherDetails = document.createElement("div");
+        cityWeatherDetails.classList.add("city__weather--details");
+
+        const cityTemp = document.createElement("h1");
+        cityTemp.classList.add("city__temp");
+        cityTemp.textContent = `${temp} °C`;
+
+        const cityNameWeather = document.createElement("h2");
+        cityNameWeather.classList.add("city__name");
+        cityNameWeather.textContent = cityName;
 
         const humidityIcon = document.createElement("img");
         humidityIcon.src = "img/humidity.png";
@@ -44,77 +68,55 @@ document.addEventListener("DOMContentLoaded", () => {
         const windIcon = document.createElement("img");
         windIcon.src = "img/wind.png";
 
-        const card = document.createElement("div");
-        card.classList.add("weatherCity");
+        const dailyDetails = document.createElement("div");
+        dailyDetails.classList.add("weather__details--information");
 
-        const weather = document.createElement("div");
-        weather.classList.add("weather");
+        const cityHumidity = document.createElement("p");
+        cityHumidity.classList.add("city__humidity");
+        cityHumidity.appendChild(humidityIcon);
+        cityHumidity.innerHTML = `<img src="img/humidity.png">${humidity} km/h`;
 
-        const icon = document.createElement("div");
-        icon.classList.add("icon");
-        const iconImage = document.createElement("img");
-        iconImage.src = `img/${weatherData.main}.png`;
-        icon.appendChild(iconImage);
+        const cityWind = document.createElement("p");
+        cityWind.classList.add("city__wind");
+        cityWind.appendChild(windIcon);
+        cityWind.innerHTML = `<img src="img/wind.png">${wind} km/h`;
 
-        const detailsCity = document.createElement("div");
-        detailsCity.classList.add("details__city");
+        dailyWeather.appendChild(icon);
+        dailyWeather.appendChild(cityWeatherDetails);
 
-        const tempHeading = document.createElement("h1");
-        tempHeading.classList.add("temp");
-        tempHeading.textContent = `${temp} °C`;
+        cityWeatherDetails.appendChild(cityTemp);
+        cityWeatherDetails.appendChild(cityNameWeather);
 
-        const cityHeading = document.createElement("h2");
-        cityHeading.classList.add("city");
-        cityHeading.textContent = cityName;
+        dailyDetails.appendChild(cityHumidity);
 
-        const detailsDaily = document.createElement("div");
-        detailsDaily.classList.add("details__information");
+        dailyDetails.appendChild(cityWind);
 
-        const humidityHeading = document.createElement("p");
-        humidityHeading.classList.add("humidity");
-        humidityHeading.appendChild(humidityIcon);
-        humidityHeading.innerHTML = `<img src="img/humidity.png">${humidity} km/h`;
+        weatherCard.appendChild(dailyWeather);
+        weatherCard.appendChild(dailyDetails); 
+        cityDailyWeather.appendChild(weatherCard);
 
-        const windHeading = document.createElement("p");
-        windHeading.classList.add("wind");
-        windHeading.appendChild(windIcon);
-        windHeading.innerHTML = `<img src="img/wind.png">${wind} km/h`;
-
-        weather.appendChild(icon);
-        weather.appendChild(detailsCity);
-        detailsCity.appendChild(tempHeading);
-        detailsCity.appendChild(cityHeading);
-        detailsDaily.appendChild(humidityHeading);
-        detailsDaily.appendChild(windHeading);
-
-        card.appendChild(weather);
-        card.appendChild(detailsDaily);
-        cardCityContainer.appendChild(card);
     }
 
-    function createDailyCard(day, dayData) {
+    function dailyCard(day, dayData) {
+        dailyCard.innerHTML = "";
 
-        console.log(day, dayData, 'bunlar');
+        const dayWeather = document.getElementById("daily__weather")
 
-        createDailyCard.innerHTML = "";
+        const cityWeatherCard = document.createElement("div");
+        cityWeatherCard.classList.add("card");
 
-        const dailyWeather = document.getElementById("daily__weather")
-
-        const card = document.createElement("div");
-        card.classList.add("card");
-
-        const cardDay = day;
-        const cardTemp = Math.round(dayData[0].temp);
-        const cardWeather = dayData[0].weather.main;
+        const cityCardName = day;
+        const cityCardWeather = dayData[0].weather.main;
+        const cityCardTemp = Math.round(dayData[0].temp);
 
 
-        card.innerHTML = `
-                <h3>${cardDay}</h3>
-                <img class="card__icon" src="img/${cardWeather}.png" alt="Hava Durumu iconu">
-                <h5>${cardTemp} °C</h5>
+        cityWeatherCard.innerHTML = `
+                <h3>${cityCardName}</h3>
+                <img class="card__icon" src="img/${cityCardWeather}.png" alt="Hava Durumu iconu">
+                <h5>${cityCardTemp} °C</h5>
             `;
 
-        dailyWeather.appendChild(card)
+        dayWeather.appendChild(cityWeatherCard)
 
     }
 
@@ -144,24 +146,24 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        createCityCard(dailyData[Object.keys(dailyData)[0]], city);
+        cityCard(dailyData[Object.keys(dailyData)[0]], city);
 
         for (const day in dailyData) {
             if (day !== Object.keys(dailyData)[0]) {
-                createDailyCard(day, dailyData[day]);
+                dailyCard(day, dailyData[day]);
             }
         }
 
-        setWeatherBackground(data.list[0].weather[0].main);
+        weatherBackground(data.list[0].weather[0].main);
         console.log(dailyData);
     }
 
-    searchBtn.addEventListener("click", () => {
+    searchButton.addEventListener("click", () => {
         const searchInputValue = searchInput.value.trim();
         if (searchInputValue !== "") {
             dataSwitch(searchInputValue);
             searchInput.value = "";
-            dailyWeatherContainer.innerHTML = "";
+            fiveDailyWeather.innerHTML = "";
         }
     });
 
@@ -171,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (searchInputValue !== "") {
                 dataSwitch(searchInputValue);
                 searchInput.value = "";
-                dailyWeatherContainer.innerHTML = "";
+                fiveDailyWeather.innerHTML = "";
             }
         }
     });
