@@ -1,47 +1,47 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const cardDay = document.getElementById("card__container");
+    const cardDay = document.getElementById("capital__daily--weather");
     const apiKey = "3e754eda3de0afa016899c9106005d58";
-    const cardTitle = ["Berlin", "London", "New York", "Tokyo", "Rome"];
+    const capitalsWeather = ["Berlin", "London", "New York", "Tokyo", "Rome"];
 
-    cardTitle.forEach(city => {
+    capitalsWeather.forEach(city => {
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                const card = document.createElement("div");
-                card.classList.add("card");
+                const capital = document.createElement("div");
+                capital.classList.add("card");
 
-                const cardCity = data.name;
-                const cardTemp =Math.round(data.main.temp);
-                const cardWeather = data.weather[0].main;
+                const capitalName = data.name;
+                const capitalIcon = data.weather[0].main;
+                const capitalTemp =Math.round(data.main.temp);
 
-                let weatherIconSrc = "";
+                let capitalWeatherIcon = "";
 
-                if (cardWeather === "Clouds") {
-                    weatherIconSrc = "./img/clouds.png";
+                if (capitalIcon === "Clouds") {
+                    capitalWeatherIcon = "./img/clouds.png";
                 }
-                else if (cardWeather === "Rain") {
-                    weatherIconSrc = "./img/rain.png";
+                else if (capitalIcon === "Rain") {
+                    capitalWeatherIcon = "./img/rain.png";
                 }
-                else if (cardWeather === "Drizzle") {
-                    weatherIconSrc = "./img/drizzle.png";
+                else if (capitalIcon === "Drizzle") {
+                    capitalWeatherIcon = "./img/drizzle.png";
                 }
-                else if (cardWeather === "Clear") {
-                    weatherIconSrc = "./img/clear.png";
+                else if (capitalIcon === "Clear") {
+                    capitalWeatherIcon = "./img/clear.png";
                 }
                 else {
-                    weatherIconSrc = "./img/snow.png";
+                    capitalWeatherIcon = "./img/snow.png";
                 }
 
-                card.innerHTML = `
-                <h3>${cardCity}</h3>
-                <img class="card__icon" src="${weatherIconSrc}" alt="Hava Durumu iconu">
-                <h5>${cardTemp} °C</h5>
+                capital.innerHTML = `
+                <h3>${capitalName}</h3>
+                <img class="card__icon" src="${capitalWeatherIcon}" alt="Hava Durumu iconu">
+                <h5>${capitalTemp} °C</h5>
             `;
 
-                cardDay.appendChild(card);
+                cardDay.appendChild(capital);
             })
             .catch(error => console.error(error));
     });

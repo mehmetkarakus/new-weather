@@ -26,7 +26,7 @@ document.querySelector("#app").innerHTML = `
 
   </section>
 
-  <section id="card__container" class="card__capital">
+  <section id="capital__daily--weather" class="card__capital">
     
   </section>
 
