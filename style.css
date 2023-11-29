@@ -147,7 +147,7 @@ img.card__icon {
   margin-top: 5px;
 }
 
-.card__city {
+.city__weather {
   background-color: #cbc9c987;
   border-radius: 15px;
   margin-top: 30px;
@@ -169,17 +169,17 @@ img.card__icon {
   align-items: center;
 }
 
-.city__weather--details {
+.daily__weather--details {
   text-align: center;
 }
 
-.city__weather--details h1 {
+.daily__weather--details h1 {
   font-size: 80px;
   margin: 0;
   margin-top: 30px;
 }
 
-.city__weather--details h2 {
+.daily__weather--details h2 {
   font-size: 45px;
   margin: 0;
   margin-top: 15px;
@@ -282,7 +282,7 @@ p.city__humidity,
     justify-content: center;
   }
 
-  .card__city {
+  .city__weather {
     width: 75%;
   }
 
@@ -290,12 +290,12 @@ p.city__humidity,
     width: 150px;
   }
 
-  .city__weather--details h1 {
+  .daily__weather--details h1 {
     font-size: 60px;
     margin-top: 15px;
   }
 
-  .city__weather--details h2 {
+  .daily__weather--details h2 {
     font-size: 35px;
   }
 
@@ -333,7 +333,7 @@ p.city__humidity,
     grid-template-columns: repeat(2, 150px);
   }
 
-  .card__city {
+  .city__weather {
     width: 85%;
   }
 
@@ -364,7 +364,7 @@ p.city__humidity,
     grid-template-columns: repeat(1, 150px);
   }
 
-  .card__city {
+  .city__weather {
     width: 85%;
   }
 

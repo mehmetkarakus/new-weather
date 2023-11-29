@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const cardDay = document.getElementById("capital__daily--weather");
+    const capitalsDailyWeather = document.getElementById("capital__daily--weather");
     const apiKey = "3e754eda3de0afa016899c9106005d58";
     const capitalsWeather = ["Berlin", "London", "New York", "Tokyo", "Rome"];
 
@@ -36,12 +36,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 capital.innerHTML = `
-                <h3>${capitalName}</h3>
-                <img class="card__icon" src="${capitalWeatherIcon}" alt="Hava Durumu iconu">
-                <h5>${capitalTemp} °C</h5>
-            `;
+                    <h3>${capitalName}</h3>
+                    <img class="card__icon" src="${capitalWeatherIcon}" alt="Hava Durumu iconu">
+                    <h5>${capitalTemp} °C</h5>
+                `;
 
-                cardDay.appendChild(capital);
+                capitalsDailyWeather.appendChild(capital);
             })
             .catch(error => console.error(error));
     });

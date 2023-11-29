@@ -5,7 +5,7 @@ import "./component/search-filter.js";
 
 document.querySelector("#app").innerHTML = `
 
-  <section class="search">
+  <section id="citySearch" class="search">
   
     <div class="searchInput">
       <input type="text" id="searchInput" placeholder="Şehir İsmi Giriniz">
@@ -15,12 +15,10 @@ document.querySelector("#app").innerHTML = `
     </div>
 
     <div class="search__list">
-      <ul id="searchResults" class="search__ul">
-      
-      </ul>
+      <ul id="searchResults" class="search__ul"></ul>
     </div>
 
-    <div class="search__not" d-flex justify-content:flex-end>
+    <div id="searchNot" class="search__not" d-flex justify-content:flex-end>
       <p class="not__found">Aradığın Şehir Bulunamadı</p>
     </div>
 
@@ -30,20 +28,27 @@ document.querySelector("#app").innerHTML = `
     
   </section>
 
-  <section id="card__city" class="card__city">
+  <section id="cityWeather" class="city__weather">
+    
     <div class="city__daily--weather">
+
       <div class="city__day--weather">
+
         <div class="icon">
           <img src="" class="weather__icon" id="cityWeatherIcon">
         </div>
-        <div class="city__weather--details">
+
+        <div class="daily__weather--details">
           <h1 class="city__temp" id="cityTemp"></h1>
           <h2 class="city__name" id="cityName"></h2>
         </div>
+
       </div>
 
       <div class="details">
+
         <div class="weather__details--information">
+
           <div class="col">
             <img src="img/humidity.png">
             <div>
@@ -51,6 +56,7 @@ document.querySelector("#app").innerHTML = `
               <p>Nem</p>
             </div>
           </div>
+
           <div class="col">
             <img src="img/wind.png">
             <div>
@@ -58,9 +64,13 @@ document.querySelector("#app").innerHTML = `
               <p>Rüzgar Hızı</p>
             </div>
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
 
   <section id="daily__weather" class="daily__weather">

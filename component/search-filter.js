@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
+ 
   var searchInput = document.getElementById("searchInput");
   var searchResults = document.getElementById("searchResults");
 
