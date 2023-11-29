@@ -52,7 +52,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     searchResults.style.display = "block";
-
     
   }
   
