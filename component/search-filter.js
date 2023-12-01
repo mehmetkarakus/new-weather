@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", async () => {
- 
   var searchInput = document.getElementById("searchInput");
   var searchResults = document.getElementById("searchResults");
 
@@ -42,17 +41,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       li.addEventListener("click", function () {
         searchInput.value = result;
-      });
-
-      li.addEventListener("click", function () {
         searchResults.style.display = "none";
       });
 
       resultsContainer.appendChild(li);
     });
 
-    searchResults.style.display = "block";
-    
+    searchResults.style.display = results.length > 0 ? "block" : "none";
   }
-  
 });
+
